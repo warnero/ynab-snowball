@@ -26,9 +26,17 @@ let conf = convict({
         env: "PORT"
     },
     mongo: {
-        doc: "Mongo connection url",
-        default: 'mongodb://localhost/snowball',
-        env: "MONGO_URL",
+        doc: "Mongo config variables",
+        url: {
+            doc: "Mongo connection url",
+            default:'mongodb://localhost/',
+            env: "MONGO_URL"
+        },
+        name: {
+            doc: "Mongo db name",
+            default: "snowball",
+            env: "MONGO_DB"
+        },
         debug: false
     },
     auth: {

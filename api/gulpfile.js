@@ -5,6 +5,7 @@ gulp.task('build', () =>
 
     gulp.src([
         'app.js',
+        'account_populate.js',
         'models/**/*.js',
         'controllers/**/*.js',
         'services/**/*.js',

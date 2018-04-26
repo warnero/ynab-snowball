@@ -1,3 +1,6 @@
 {
-  "mongo": "mongodb://localhost/snowball-dev"
+  "mongo" :{
+    "name": "snowball-dev",
+    "debug": true
+  }
 }

@@ -4,3 +4,7 @@
 api/dist/config/local_config\.json
 
 api/dist/
+api/config/local_config.json
+api/node_modules/
+snowball-react/node_modules/
+\.DS_Store
