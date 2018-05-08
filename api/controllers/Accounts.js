@@ -57,9 +57,7 @@ async function getAccount(req, res, next) {
 }
 
 async function updateAccount(req, res, next) {
-    console.log('calling updateAccount with ', req.body, req.params);
     try {
-        console.log('trying to update account');
         let account = await Account.Model.findById(req.params.id);
         _.assign(account, req.body);
         account = await account.save();
@@ -78,7 +76,6 @@ async function updateAccount(req, res, next) {
         console.log('error calling Mongo ', e);
         return res.json({message: 'Error calling database'});
     }
-    return next();
 }
 
 async function deleteAccount(req, res, next) {

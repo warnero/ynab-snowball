@@ -36,7 +36,7 @@ export default class Accounts extends React.Component {
                 <Table.Row key={acct._id}>
                     <Table.Cell><Link to={`/accounts/${acct._id}`}>{acct.name}</Link></Table.Cell>
                     <Table.Cell>{acct.includeInSnowball ? "Yes" : "No"}</Table.Cell>
-                    <Table.Cell>{-1 * acct.startingBalance / 1000}</Table.Cell>
+                    <Table.Cell>{-1 * acct.currentBalance / 1000}</Table.Cell>
                     <Table.Cell>{acct.creditLimit}</Table.Cell>
                     <Table.Cell>{acct.percentageRate}</Table.Cell>
                 </Table.Row>
