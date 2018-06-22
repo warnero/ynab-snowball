@@ -24,10 +24,27 @@ async function defaultSnowball(req, res, next) {
                 includeInSnowball: true,
                 currentBalance: {'$lt': 0}
             })
-            .sort({currentBalance: 'asc'});
+            .sort({currentBalance: 'asc'})
+            .lean();
+
         let message = 'No accounts found matching criteria';
         if (accounts.length > 0) {
             message = `Successfully retrieved ${accounts.length} accounts`;
+        }
+
+        let snowball = [];
+        for (acct of accounts) {
+            let balance = -1 * acct.currentBalance / 1000;
+            let monthlyInterestRate = acct.percentageRate / 12;
+            snowball.push({
+                account: {
+                    name: acct.name,
+                    balance: balance,
+                    interestRate: acct.percentageRate,
+
+                }
+            });
+            calculatePayoff(monthlyInterestRate, balance, )
         }
         const data = {
             accounts: accounts,
@@ -39,6 +56,15 @@ async function defaultSnowball(req, res, next) {
         return res.json({message: 'Error calling database'});
     }
 
+}
+
+function calculatePayoff(monthlyInterestRate, balance, paymentAmt, months) {
+    let monthlyInterestDue = monthlyInterestRate * balance;
+    let currPrincipal = paymentAmt - monthlyInterestDue;
+    let newBalance = balance - paymentAmt;
+    //Need to turn this into a recursive call so that we populate each month
+    if ()
+    months.push(calculatePayoff(monthlyInterestRate, newBalance, paymentAmt));
 }
 
 async function getSnowball(type, startDate) {

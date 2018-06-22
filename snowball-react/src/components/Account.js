@@ -27,7 +27,7 @@ const AccountForm = props => {
                 <label className="label">Account Name</label>
                 <Field type="text" name="name" placeholder="Account Name" />
             </div>
-            <div className={'ui checkbox'  + (values.includeInSnowball ? ' checked' : '')}>
+            <div className={'ui checkbox'  + (values.includeInSnowball === true ? ' checked' : '')}>
 
                 <Field checked={values.includeInSnowball} type="checkbox" name="includeInSnowball"/>
                 <label>Include in Snowball</label>
