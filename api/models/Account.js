@@ -1,5 +1,12 @@
 import mongoose from 'mongoose'
 
+const _syncSchema = {
+    date: {type: Date, "default": Date.now},
+    success: {type: Boolean, "default": true},
+    balance: Number,
+    syncErrors: Object
+};
+
 export const jsonSchema = {
     createdBy: {type: String, ref: 'User'},
     name: String,
@@ -15,12 +22,15 @@ export const jsonSchema = {
     paymentDueDate: Number,
     nextPaymentDueDate: Date,
     currentSnowballAmount: Number,
+    currentBalance: Number,
     startingBalance: Number,
+    minimumPayment: Number,
     startingBalanceDate: Date,
     includeInSnowball: {type: Boolean, "default": true},
     created: {type: Date, "default": Date.now},
     lastUpdated: {type: Date, "default": Date.now},
     lastSynced: {type: Date, "default": Date.now},
+    sync:[_syncSchema],
     lastUpdatedBy: {type: String, ref: 'User'}
 };
 

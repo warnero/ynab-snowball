@@ -18,7 +18,7 @@ router.route('/:id')
 async function findAccounts(req, res, next) {
     console.log('called getAll from Accounts');
     try {
-        const accounts = await Account.Model.find();
+        const accounts = await Account.Model.find().lean();
         let message = 'No accounts found matching criteria';
         if (accounts.length > 0) {
             message = `Successfully retrieved ${accounts.length} accounts`;
@@ -40,7 +40,8 @@ async function createAccount(req, res, next) {
 
 async function getAccount(req, res, next) {
     try {
-        const account = await Account.Model.findById(req.params.id);
+        const account = await Account.Model.findById(req.params.id).lean();
+        console.log('my account data from db ', account);
         let message = 'No account found matching criteria';
         if (account !== null) {
             message = `Successfully retrieved account`;
@@ -57,9 +58,7 @@ async function getAccount(req, res, next) {
 }
 
 async function updateAccount(req, res, next) {
-    console.log('calling updateAccount with ', req.body, req.params);
     try {
-        console.log('trying to update account');
         let account = await Account.Model.findById(req.params.id);
         _.assign(account, req.body);
         account = await account.save();
@@ -78,7 +77,6 @@ async function updateAccount(req, res, next) {
         console.log('error calling Mongo ', e);
         return res.json({message: 'Error calling database'});
     }
-    return next();
 }
 
 async function deleteAccount(req, res, next) {
